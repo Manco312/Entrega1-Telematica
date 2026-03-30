@@ -90,7 +90,7 @@ public class GameClient extends JFrame {
         setVisible(true);
 
         // Timer para procesar mensajes en el hilo de Swing
-        new Timer(80, e -> processMessages()).start();
+        new javax.swing.Timer(80, e -> processMessages()).start();
     }
 
     // =====================================================================
