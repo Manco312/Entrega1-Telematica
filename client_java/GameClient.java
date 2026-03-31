@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.awt.Desktop;
+import java.net.URI;
 
 /**
  * CyberGame Client — Java (interfaz web compartida)
