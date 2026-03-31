@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberGame Client</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════  LOGIN  ═══════════════════════════ -->
+<div id="screen-login" class="screen active">
+  <div class="login-box">
+    <pre class="ascii-art">
+  ██████╗██╗   ██╗██████╗ ███████╗██████╗
+ ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗
+ ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝
+ ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗
+ ╚██████╗   ██║   ██████╔╝███████╗██║  ██║
+  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝</pre>
+    <div class="login-subtitle">// Distributed Network Simulator v1.0</div>
+
+    <div class="login-form">
+      <div class="field">
+        <label>USERNAME</label>
+        <input id="inp-user" type="text" placeholder="attacker1 / defender1" spellcheck="false" />
+      </div>
+      <div class="field">
+        <label>PASSWORD</label>
+        <input id="inp-pass" type="password" placeholder="••••••••" />
+      </div>
+      <button id="btn-login" class="btn btn-primary full" disabled>[ CONNECT ]</button>
+      <div id="login-status" class="status-msg">Connecting to bridge…</div>
+    </div>
+
+    <div class="login-hint">
+      bridge: <span id="ws-url-hint"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════  LOBBY  ═══════════════════════════ -->
+<div id="screen-lobby" class="screen">
+  <div class="lobby-wrap">
+    <div class="lobby-header">
+      <span class="section-title">LOBBY</span>
+      <span id="lobby-badge" class="badge"></span>
+    </div>
+
+    <div class="toolbar">
+      <button id="btn-list"   class="btn">LIST GAMES</button>
+      <button id="btn-create" class="btn">CREATE GAME</button>
+      <button id="btn-join"   class="btn">JOIN GAME</button>
+      <button id="btn-start"  class="btn btn-success">START GAME</button>
+      <button id="btn-lquit"  class="btn btn-danger">QUIT</button>
+    </div>
+
+    <div class="lobby-cols">
+      <div class="lobby-col">
+        <div class="col-title">GAMES</div>
+        <div id="games-box" class="scroll-box"></div>
+      </div>
+      <div class="lobby-col">
+        <div class="col-title">LOG</div>
+        <div id="lobby-log" class="scroll-box log-lines"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════  GAME  ═══════════════════════════ -->
+<div id="screen-game" class="screen">
+  <div class="game-wrap">
+
+    <!-- left: map + legend -->
+    <div class="game-left">
+      <canvas id="map" width="600" height="600"></canvas>
+      <div class="legend">
+        <span class="l-me">● YOU</span>
+        <span class="l-atk">● ATTACKER</span>
+        <span class="l-def">● DEFENDER</span>
+        <span class="l-safe">■ SAFE</span>
+        <span class="l-atked">■ ATTACKED</span>
+        <span class="l-dest">■ DESTROYED</span>
+      </div>
+    </div>
+
+    <!-- right: HUD + controls + log -->
+    <div class="game-right">
+      <div id="hud" class="hud"></div>
+
+      <div class="dpad-wrap">
+        <div class="dpad">
+          <button class="btn dpad-btn" data-dir="NORTH">▲</button>
+          <div class="dpad-mid">
+            <button class="btn dpad-btn" data-dir="WEST">◄</button>
+            <div class="dpad-center">✛</div>
+            <button class="btn dpad-btn" data-dir="EAST">►</button>
+          </div>
+          <button class="btn dpad-btn" data-dir="SOUTH">▼</button>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button id="btn-scan"     class="btn">SCAN</button>
+        <button id="btn-attack"   class="btn btn-danger  hide">ATTACK</button>
+        <button id="btn-mitigate" class="btn btn-success hide">MITIGATE</button>
+        <button id="btn-gstatus"  class="btn">STATUS</button>
+        <button id="btn-gquit"    class="btn btn-danger">QUIT</button>
+      </div>
+
+      <div class="col-title">LOG</div>
+      <div id="game-log" class="scroll-box log-lines game-log"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════  MODAL  ═══════════════════════════ -->
+<div id="modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div id="modal-title" class="modal-title"></div>
+    <input id="modal-input" class="modal-input" type="text" />
+    <div class="modal-btns">
+      <button id="modal-ok"     class="btn btn-primary">OK</button>
+      <button id="modal-cancel" class="btn">CANCEL</button>
+    </div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

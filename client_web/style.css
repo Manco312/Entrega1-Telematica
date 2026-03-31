@@ -1,0 +1,267 @@
+/* ── CSS variables ──────────────────────────────────────────────────────── */
+:root {
+  --bg:       #0a0a0a;
+  --panel:    #0d0d0d;
+  --border:   #1a3a1a;
+  --green:    #00ff41;
+  --green2:   #00cc33;
+  --dim:      #2a5a2a;
+  --red:      #ff3333;
+  --orange:   #ff6600;
+  --blue:     #3399ff;
+  --yellow:   #ffff00;
+  --gray:     #444444;
+  --font:     'Courier New', Courier, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--green);
+  font-family: var(--font);
+  font-size: 13px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Screens ────────────────────────────────────────────────────────────── */
+.screen        { display: none;  width: 100vw; height: 100vh; }
+.screen.active { display: flex; }
+
+/* ── LOGIN ──────────────────────────────────────────────────────────────── */
+#screen-login { align-items: center; justify-content: center; }
+
+.login-box {
+  width: 440px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 32px 40px;
+  box-shadow: 0 0 40px rgba(0,255,65,.05);
+}
+
+.ascii-art {
+  color: var(--green2);
+  font-size: 9px;
+  line-height: 1.25;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  color: var(--dim);
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 28px;
+}
+
+.login-form { display: flex; flex-direction: column; gap: 14px; }
+
+.field       { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 11px; color: var(--dim); letter-spacing: 1px; }
+
+input {
+  width: 100%;
+  background: #111;
+  border: 1px solid var(--border);
+  color: var(--green);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 6px 10px;
+  outline: none;
+}
+input:focus { border-color: var(--green2); }
+
+.login-hint {
+  margin-top: 18px;
+  font-size: 11px;
+  color: var(--dim);
+  text-align: center;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--green);
+  font-family: var(--font);
+  font-size: 12px;
+  padding: 6px 14px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background .1s, border-color .1s;
+  white-space: nowrap;
+}
+.btn:hover   { background: #1a2a1a; border-color: var(--green2); }
+.btn:active  { background: #2a3a2a; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn.full          { width: 100%; padding: 10px; margin-top: 4px; }
+.btn.btn-primary   { border-color: var(--green2); }
+.btn.btn-primary:hover { background: #002200; }
+.btn.btn-success   { border-color: #00aa44; color: #00ff88; }
+.btn.btn-success:hover { background: #001a0a; }
+.btn.btn-danger    { border-color: #aa2200; color: var(--red); }
+.btn.btn-danger:hover  { background: #1a0000; }
+
+/* ── Status message ─────────────────────────────────────────────────────── */
+.status-msg      { min-height: 20px; font-size: 12px; text-align: center; color: var(--dim); margin-top: 4px; }
+.status-msg.ok   { color: var(--green); }
+.status-msg.err  { color: var(--red); }
+
+/* ── LOBBY ──────────────────────────────────────────────────────────────── */
+#screen-lobby { flex-direction: column; padding: 20px; }
+
+.lobby-wrap { display: flex; flex-direction: column; gap: 12px; height: 100%; }
+
+.lobby-header {
+  display: flex; align-items: center; gap: 14px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.section-title { font-size: 20px; color: var(--green2); letter-spacing: 4px; }
+
+.badge { font-size: 11px; color: var(--dim); border: 1px solid var(--border); padding: 2px 10px; }
+
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.lobby-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+
+.lobby-col { display: flex; flex-direction: column; gap: 6px; min-height: 0; }
+
+.col-title {
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 2px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+}
+
+.scroll-box {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  padding: 8px;
+  background: #050505;
+  min-height: 0;
+}
+
+.log-lines { font-size: 12px; line-height: 1.7; }
+
+/* ── GAME ───────────────────────────────────────────────────────────────── */
+#screen-game { flex-direction: row; }
+
+.game-wrap { display: flex; width: 100%; height: 100%; }
+
+.game-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+#map { border: 1px solid var(--border); display: block; image-rendering: pixelated; }
+
+.legend {
+  margin-top: 10px;
+  display: flex;
+  gap: 14px;
+  font-size: 11px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.l-me    { color: var(--green); }
+.l-atk   { color: var(--orange); }
+.l-def   { color: var(--blue); }
+.l-safe  { color: var(--yellow); }
+.l-atked { color: var(--red); }
+.l-dest  { color: var(--gray); }
+
+.game-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.hud {
+  font-size: 12px;
+  line-height: 1.9;
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  background: #050505;
+  min-height: 60px;
+}
+
+/* D-pad */
+.dpad-wrap { display: flex; justify-content: center; }
+
+.dpad { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+.dpad-mid { display: flex; align-items: center; gap: 4px; }
+
+.dpad-center { width: 38px; text-align: center; color: var(--dim); font-size: 14px; }
+
+.dpad-btn { width: 42px; height: 36px; padding: 0; font-size: 14px; }
+
+.action-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.game-log { flex: 1; min-height: 0; }
+
+/* ── Modal ──────────────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.82);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+}
+.modal-overlay.hidden { display: none; }
+
+.modal-box {
+  background: var(--panel);
+  border: 1px solid var(--green2);
+  padding: 28px 36px;
+  display: flex; flex-direction: column; gap: 16px;
+  min-width: 300px;
+  box-shadow: 0 0 30px rgba(0,255,65,.15);
+}
+
+.modal-title { font-size: 14px; letter-spacing: 1px; }
+
+.modal-input {
+  background: #111; border: 1px solid var(--border);
+  color: var(--green); font-family: var(--font);
+  font-size: 14px; padding: 8px 12px; outline: none; width: 100%;
+}
+.modal-input:focus { border-color: var(--green2); }
+
+.modal-btns { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* ── Log entry colours ──────────────────────────────────────────────────── */
+.c-ok   { color: var(--green); }
+.c-err  { color: var(--red); }
+.c-warn { color: var(--orange); }
+.c-info { color: var(--blue); }
+.c-sys  { color: var(--dim); }
+
+/* ── Utility ────────────────────────────────────────────────────────────── */
+.hide { display: none !important; }
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); }
+::-webkit-scrollbar-thumb:hover { background: var(--dim); }
